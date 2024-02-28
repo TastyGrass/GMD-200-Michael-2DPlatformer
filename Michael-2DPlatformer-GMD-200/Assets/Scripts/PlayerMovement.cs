@@ -38,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
         {
             moving = true;
+
         }
         else
         {
@@ -50,6 +51,17 @@ public class PlayerMovement : MonoBehaviour
     {
         Collider2D col = Physics2D.OverlapCircle(transform.position, groundCheckRadius, groundLayer);
         isGrounded = col != null;
+
+
+        rb.velocity = new Vector2(xMoveInput + rb.velocity.x, rb.velocity.y);
+        if (rb.velocity.x > 10f)
+        {
+            rb.velocity = new Vector2(10f, rb.velocity.y);
+        }
+        else if (rb.velocity.x < -10f)
+        {
+            rb.velocity = new Vector2(-10f, rb.velocity.y);
+        }
         if (shouldJump == true)
         {
             if (isGrounded == true)
